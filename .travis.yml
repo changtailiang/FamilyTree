@@ -1,21 +1,22 @@
-language: android
-
+# Disabling sudo moves build to the Container Based Infrastructure on Travis CI
 sudo: false
+
+language: android
+jdk: oraclejdk8
 
 android:
   components:
-    - build-tools-25.0.2
+    - platform-tools
+    - tools
     - android-25
+    - build-tools-25.0.2
     - extra-android-m2repository
     - extra-android-support
 
-  licenses:
-    - 'android-sdk-preview-license-52d11cd2'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
-
-jdk:
-  - oraclejdk8
-
 script:
-  - "bash ./gradlew assembleRelease"
+  - bash ./gradlew assembleRelease  
+
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/.gradle
